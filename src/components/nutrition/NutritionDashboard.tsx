@@ -3,12 +3,9 @@ import { useNutrition } from "../../hooks/useNutrition";
 import { dailyTotals, entriesForDate, localDateKey } from "../../lib/nutrition";
 import type { WorkoutSet } from "../../lib/types";
 import CalorieProgress from "./CalorieProgress";
-import DailyLog from "./DailyLog";
-import FoodLibrary from "./FoodLibrary";
+import DailyIntake from "./DailyIntake";
 import IntakeAnalytics from "./IntakeAnalytics";
-import MealSuggestions from "./MealSuggestions";
 import NutritionSettings from "./NutritionSettings";
-import QuickAdd from "./QuickAdd";
 
 interface Props {
   sets: WorkoutSet[];
@@ -18,12 +15,14 @@ export default function NutritionDashboard({ sets }: Props) {
   const store = useNutrition();
   const dateKey = localDateKey();
 
-  const todayEntries = useMemo(
-    () => entriesForDate(store.log, dateKey),
+  const todayEntry = useMemo(
+    () => entriesForDate(store.log, dateKey)[0],
     [store.log, dateKey],
   );
-  const totals = useMemo(() => dailyTotals(todayEntries), [todayEntries]);
-  const remaining = Math.max(0, store.settings.calorieTarget - totals.calories);
+  const totals = useMemo(
+    () => dailyTotals(todayEntry ? [todayEntry] : []),
+    [todayEntry],
+  );
 
   return (
     <div className="flex flex-col gap-6">
@@ -31,35 +30,20 @@ export default function NutritionDashboard({ sets }: Props) {
 
       <div className="grid gap-6 lg:grid-cols-2">
         <CalorieProgress totals={totals} settings={store.settings} />
-        <MealSuggestions
-          remainingKcal={remaining}
-          foods={store.foods}
-          dateKey={dateKey}
-          onLog={store.addEntry}
+        <DailyIntake
+          entry={todayEntry}
+          onSave={(calories, protein) =>
+            store.setDayIntake(dateKey, calories, protein)
+          }
+          onClear={() => store.clearDay(dateKey)}
         />
       </div>
-
-      <QuickAdd
-        foods={store.foods}
-        dateKey={dateKey}
-        onLog={store.addEntry}
-        onSaveFood={store.addFood}
-      />
-
-      <DailyLog entries={todayEntries} onRemove={store.removeEntry} />
-
-      <FoodLibrary
-        foods={store.foods}
-        onAdd={store.addFood}
-        onUpdate={store.updateFood}
-        onRemove={store.removeFood}
-      />
 
       <IntakeAnalytics log={store.log} sets={sets} />
 
       <footer className="pb-4 pt-2 text-center text-xs text-slate-600">
-        Calories and your food library are saved locally in this browser. Nothing leaves
-        your machine.
+        Your calorie targets and daily intake are saved locally in this browser.
+        Nothing leaves your machine.
       </footer>
     </div>
   );

@@ -100,7 +100,7 @@ const TABS: { key: Tab; label: string; blurb: string }[] = [
     key: "nutrition",
     label: "Nutrition",
     blurb:
-      "Log calories against a personalized bulking target, get high-calorie suggestions to close the daily gap, and see how your intake tracks against weight and strength gains.",
+      "Enter your daily calories and protein (logged in MyFitnessPal) against a personalized bulking target, and see how your intake tracks against weight and strength gains.",
   },
   {
     key: "weight",

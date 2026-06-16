@@ -20,23 +20,20 @@ plots each as a scatter with a trend line, and writes plain-English takeaways.
 
 ## Nutrition tab
 
-Built for the "I can't eat enough to gain weight" problem:
+Built for the "I can't eat enough to gain weight" problem. Log your food in
+[MyFitnessPal](https://www.myfitnesspal.com/) and transfer the daily totals here:
 
 - **Daily targets** - a suggested calorie/protein goal derived from your latest body weight
   (maintenance is estimated as `bodyweight x 15`, the bulking target adds a ~400 kcal surplus
   for roughly +0.4 lb/week, and protein defaults to ~1 g/lb). Fully editable.
 - **Today** - calorie and protein progress bars showing how much you have left to eat.
-- **Close the gap** - calorie-dense food suggestions sized to whatever surplus remains for the
-  day, drawn from a built-in catalog plus your own library; one tap to log them.
-- **Log food** - one-tap chips from your saved food library plus a manual entry form that can
-  optionally save the food back to the library.
-- **Food library** - add, edit, and delete your common foods/meals (calories, protein, serving
-  label) for fast repeat logging.
-- **Intake vs results** - once you have a few weeks of logs, it correlates your weekly average
+- **Today's intake** - one place to enter the day's total calories and protein from MyFitnessPal;
+  re-saving overwrites the day.
+- **Intake vs results** - once you have a few weeks of data, it correlates your weekly average
   daily calories against weekly body-weight change (and weekly strength change) with a scatter,
   trend line, Pearson r, and a plain-English takeaway.
 
-Your food log, library, and targets are saved in your browser via `localStorage`
+Your daily intake and targets are saved in your browser via `localStorage`
 (`bulk-tracker:v1`); nothing is sent anywhere.
 
 ### Method

@@ -1,33 +1,18 @@
 import { DAY_MS } from "./metrics";
 import { WEIGHT_DATA } from "./weightData";
 
-/** A reusable food or meal saved to the user's library for one-tap logging. */
-export interface FoodItem {
-  id: string;
-  name: string;
-  /** Calories per serving. */
-  calories: number;
-  /** Protein (g) per serving. */
-  protein: number;
-  carbs?: number;
-  fat?: number;
-  /** Human label for one serving, e.g. "2 tbsp", "1 cup". */
-  servingLabel?: string;
-}
-
-/** A single logged item on a given day. Calories/protein are already totalled. */
+/**
+ * One day's intake, transferred from an external tracker (e.g. MyFitnessPal).
+ * There is at most one entry per calendar day.
+ */
 export interface LogEntry {
   id: string;
   /** Local calendar day key, "YYYY-MM-DD". */
   dateKey: string;
-  name: string;
-  /** Total calories for this entry (per-serving x servings). */
+  /** Total calories for the day. */
   calories: number;
-  /** Total protein (g) for this entry. */
+  /** Total protein (g) for the day. */
   protein: number;
-  servings: number;
-  /** Library item this entry came from, if any. */
-  foodId?: string;
 }
 
 export interface NutritionSettings {
