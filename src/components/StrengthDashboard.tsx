@@ -1,16 +1,8 @@
 import { useMemo, useState } from "react";
 import Controls from "./Controls";
-import FactorRanking from "./FactorRanking";
-import InsightsPanel from "./InsightsPanel";
 import ProgressionChart from "./ProgressionChart";
-import ScatterCard from "./ScatterCard";
 import StatsHeader from "./StatsHeader";
-import {
-  analyzeFactors,
-  buildInsights,
-  buildObservations,
-  summarize,
-} from "../lib/analysis";
+import { summarize } from "../lib/analysis";
 import { buildSessions } from "../lib/metrics";
 import { exercisesByFrequency } from "../lib/parse";
 import type { ImprovementMetric, WorkoutSet } from "../lib/types";
@@ -37,26 +29,14 @@ export default function StrengthDashboard({ sets }: Props) {
     const preferred = QUICK_PICKS.find((q) => byFreq.includes(q));
     return preferred ?? byFreq[0] ?? QUICK_PICKS[0];
   });
-  const [windowDays, setWindowDays] = useState(14);
   const [metric, setMetric] = useState<ImprovementMetric>("e1rm");
-  const [selectedFactor, setSelectedFactor] = useState<string>("frequency");
 
   const sessions = useMemo(
     () => (exercise ? buildSessions(sets, exercise) : []),
     [sets, exercise],
   );
 
-  const observations = useMemo(
-    () => buildObservations(sessions, windowDays, metric),
-    [sessions, windowDays, metric],
-  );
-
-  const results = useMemo(() => analyzeFactors(observations), [observations]);
-  const insights = useMemo(() => buildInsights(results), [results]);
   const stats = useMemo(() => summarize(sessions, metric), [sessions, metric]);
-
-  const selectedResult =
-    results.find((r) => r.def.key === selectedFactor) ?? results[0];
 
   const enoughData = sessions.length >= MIN_SESSIONS;
 
@@ -67,8 +47,6 @@ export default function StrengthDashboard({ sets }: Props) {
           exercises={exercises}
           exercise={exercise}
           onExercise={setExercise}
-          windowDays={windowDays}
-          onWindow={setWindowDays}
           metric={metric}
           onMetric={setMetric}
           quickPicks={QUICK_PICKS.filter((q) => exercises.includes(q))}
@@ -83,26 +61,8 @@ export default function StrengthDashboard({ sets }: Props) {
           least {MIN_SESSIONS} sessions for a meaningful factor analysis.
         </div>
       ) : (
-        <>
-          <ProgressionChart sessions={sessions} metric={metric} />
-
-          <div className="grid gap-6 lg:grid-cols-2">
-            <FactorRanking
-              results={results}
-              selectedKey={selectedResult?.def.key ?? ""}
-              onSelect={setSelectedFactor}
-            />
-            {selectedResult && <ScatterCard result={selectedResult} />}
-          </div>
-
-          <InsightsPanel insights={insights} />
-        </>
+        <ProgressionChart sessions={sessions} metric={metric} />
       )}
-
-      <footer className="pb-4 pt-2 text-center text-xs text-slate-600">
-        Analyzing {sessions.length} sessions of {exercise} over a {windowDays}-day lead-up
-        window. Estimated 1RM uses the Epley formula.
-      </footer>
     </div>
   );
 }

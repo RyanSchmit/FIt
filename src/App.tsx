@@ -94,7 +94,7 @@ const TABS: { key: Tab; label: string; blurb: string }[] = [
     key: "strength",
     label: "Strength",
     blurb:
-      "Discover which training factors precede your biggest strength gains - frequency, volume, sets, intensity, and recovery - from your own lifting history.",
+      "See how your strength changes over time from your own lifting history.",
   },
   {
     key: "nutrition",

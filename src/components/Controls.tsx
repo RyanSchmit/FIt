@@ -4,21 +4,15 @@ interface Props {
   exercises: string[];
   exercise: string;
   onExercise: (name: string) => void;
-  windowDays: number;
-  onWindow: (days: number) => void;
   metric: ImprovementMetric;
   onMetric: (m: ImprovementMetric) => void;
   quickPicks: string[];
 }
 
-const WINDOWS = [7, 14, 21, 28];
-
 export default function Controls({
   exercises,
   exercise,
   onExercise,
-  windowDays,
-  onWindow,
   metric,
   onMetric,
   quickPicks,
@@ -41,7 +35,7 @@ export default function Controls({
         ))}
       </div>
 
-      <div className="grid gap-4 sm:grid-cols-3">
+      <div className="grid gap-4 sm:grid-cols-2">
         <label className="flex flex-col gap-1.5 text-xs text-slate-400">
           Exercise
           <select
@@ -55,25 +49,6 @@ export default function Controls({
               </option>
             ))}
           </select>
-        </label>
-
-        <label className="flex flex-col gap-1.5 text-xs text-slate-400">
-          Lead-up window
-          <div className="flex overflow-hidden rounded-lg border border-ink-700">
-            {WINDOWS.map((w) => (
-              <button
-                key={w}
-                onClick={() => onWindow(w)}
-                className={`flex-1 px-2 py-2 text-sm transition ${
-                  windowDays === w
-                    ? "bg-accent text-ink-950"
-                    : "bg-ink-850 text-slate-300 hover:bg-ink-800"
-                }`}
-              >
-                {w}d
-              </button>
-            ))}
-          </div>
         </label>
 
         <label className="flex flex-col gap-1.5 text-xs text-slate-400">
