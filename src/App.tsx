@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import FileDrop from "./components/FileDrop";
 import NutritionDashboard from "./components/nutrition/NutritionDashboard";
 import PlanDashboard from "./components/plan/PlanDashboard";
 import StrengthDashboard from "./components/StrengthDashboard";
@@ -216,24 +215,17 @@ export default function App() {
               );
             })}
           </div>
-
-          <div className="ml-auto hidden md:block">
-            <FileDrop onCsv={ingest} currentName={sourceName} />
-          </div>
         </div>
       </nav>
 
       <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6">
-        <header className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
-          <div>
-            <h1 className="text-2xl font-bold tracking-tight text-slate-50">
-              {active.label}
-            </h1>
-            <p className="mt-1 max-w-xl text-sm text-slate-400">{active.blurb}</p>
-          </div>
-          <div className="md:hidden">
-            <FileDrop onCsv={ingest} currentName={sourceName} />
-          </div>
+        <header className="mb-6">
+          <h1 className="text-2xl font-bold tracking-tight text-slate-50">
+            {active.label}
+          </h1>
+          <p className="mt-1 max-w-xl text-sm text-slate-400">
+            {active.blurb}
+          </p>
         </header>
 
         {error && (
@@ -244,16 +236,27 @@ export default function App() {
 
         {tab === "weight" ? (
           <WeightDashboard />
+        ) : tab === "strength" ? (
+          loading ? (
+            <div className="py-24 text-center text-slate-500">
+              Loading your data...
+            </div>
+          ) : (
+            <StrengthDashboard
+              sets={sets}
+              onCsv={ingest}
+              sourceName={sourceName}
+            />
+          )
         ) : loading ? (
           <div className="py-24 text-center text-slate-500">
             Loading your data...
           </div>
         ) : sets.length === 0 ? (
           <div className="py-24 text-center text-slate-500">
-            Drop a Strong CSV export above to begin.
+            Import your Strong workout history on the Strength tab to use this
+            page.
           </div>
-        ) : tab === "strength" ? (
-          <StrengthDashboard sets={sets} />
         ) : tab === "plan" ? (
           <PlanDashboard sets={sets} />
         ) : (

@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import Controls from "./Controls";
+import FileDrop from "./FileDrop";
 import ProgressionChart from "./ProgressionChart";
 import StatsHeader from "./StatsHeader";
 import { summarize } from "../lib/analysis";
@@ -12,16 +13,18 @@ const QUICK_PICKS = [
   "Bench Press (Barbell)",
   "Shoulder Press (Machine)",
   "Romanian Deadlift (Barbell)",
-  "Row (Barbell)",
+  "Bent Over Row (Barbell)",
   "Deadlift (Barbell)",
 ];
 const MIN_SESSIONS = 4;
 
 interface Props {
   sets: WorkoutSet[];
+  onCsv: (csv: string, name: string) => void;
+  sourceName: string;
 }
 
-export default function StrengthDashboard({ sets }: Props) {
+export default function StrengthDashboard({ sets, onCsv, sourceName }: Props) {
   const exercises = useMemo(() => exercisesByFrequency(sets), [sets]);
 
   const [exercise, setExercise] = useState<string>(() => {
@@ -42,26 +45,36 @@ export default function StrengthDashboard({ sets }: Props) {
 
   return (
     <div className="flex flex-col gap-6">
-      <section className="rounded-2xl border border-ink-700 bg-ink-900/70 p-5">
-        <Controls
-          exercises={exercises}
-          exercise={exercise}
-          onExercise={setExercise}
-          metric={metric}
-          onMetric={setMetric}
-          quickPicks={QUICK_PICKS.filter((q) => exercises.includes(q))}
-        />
-      </section>
+      <FileDrop onCsv={onCsv} currentName={sourceName} />
 
-      <StatsHeader stats={stats} />
-
-      {!enoughData ? (
-        <div className="rounded-2xl border border-amber-500/30 bg-amber-500/10 px-4 py-6 text-sm text-amber-200">
-          Only {sessions.length} session(s) recorded for {exercise}. Pick a lift with at
-          least {MIN_SESSIONS} sessions for a meaningful factor analysis.
+      {sets.length === 0 ? (
+        <div className="rounded-2xl border border-ink-700 bg-ink-900/70 px-4 py-12 text-center text-sm text-slate-500">
+          Drop a Strong CSV export above to begin.
         </div>
       ) : (
-        <ProgressionChart sessions={sessions} metric={metric} />
+        <>
+          <section className="rounded-2xl border border-ink-700 bg-ink-900/70 p-5">
+            <Controls
+              exercises={exercises}
+              exercise={exercise}
+              onExercise={setExercise}
+              metric={metric}
+              onMetric={setMetric}
+              quickPicks={QUICK_PICKS.filter((q) => exercises.includes(q))}
+            />
+          </section>
+
+          <StatsHeader stats={stats} />
+
+          {!enoughData ? (
+            <div className="rounded-2xl border border-amber-500/30 bg-amber-500/10 px-4 py-6 text-sm text-amber-200">
+              Only {sessions.length} session(s) recorded for {exercise}. Pick a lift with at
+              least {MIN_SESSIONS} sessions for a meaningful factor analysis.
+            </div>
+          ) : (
+            <ProgressionChart sessions={sessions} metric={metric} />
+          )}
+        </>
       )}
     </div>
   );

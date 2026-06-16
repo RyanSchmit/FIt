@@ -19,7 +19,7 @@ interface Props {
 }
 
 export default function ProgressionChart({ sessions, metric }: Props) {
-  const [showWeight, setShowWeight] = useState(true);
+  const [showWeight, setShowWeight] = useState(false);
   const [showTrend, setShowTrend] = useState(true);
   const unit = metric === "e1rm" ? "Est. 1RM (lb)" : "Top weight (lb)";
 
