@@ -9,6 +9,9 @@ const NOTE_BACKFILL_KEY = "bulk-tracker:weights:note-backfill:v2";
 /** Default note applied to historical points digitized from the MFP screenshot. */
 const SEED_NOTE = "Estimate from myFitnessPal screenshot";
 
+/** Pre-filled note for new weight entries. */
+export const DEFAULT_WEIGHT_NOTE = "Weighed first thing after waking up";
+
 export interface WeightEntry {
   id: string;
   recordedAt: number; // epoch ms - captures both date and time of day

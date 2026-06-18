@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useWeight } from "../../hooks/useWeight";
+import { DEFAULT_WEIGHT_NOTE, useWeight } from "../../hooks/useWeight";
 import WeightChart from "./WeightChart";
 
 /** Format a Date as the value a datetime-local input expects: "YYYY-MM-DDTHH:mm". */
@@ -14,7 +14,7 @@ export default function WeightDashboard() {
   const { entries, addEntry, updateEntry, removeEntry } = useWeight();
   const [weight, setWeight] = useState("");
   const [when, setWhen] = useState(() => toLocalInputValue(new Date()));
-  const [note, setNote] = useState("");
+  const [note, setNote] = useState(DEFAULT_WEIGHT_NOTE);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
   const [editingId, setEditingId] = useState<string | null>(null);
@@ -39,7 +39,7 @@ export default function WeightDashboard() {
     addEntry(lb, ts, trimmed || undefined);
     setWeight("");
     setWhen(toLocalInputValue(new Date()));
-    setNote("");
+    setNote(DEFAULT_WEIGHT_NOTE);
     setErrorMsg(null);
   }
 
