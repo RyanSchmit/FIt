@@ -15,10 +15,12 @@ function fmtDate(d: Date | null): string {
 
 function Stat({ label, value, sub }: { label: string; value: string; sub?: string }) {
   return (
-    <div className="rounded-xl border border-ink-700 bg-ink-850 px-4 py-3">
-      <div className="text-xs uppercase tracking-wide text-slate-500">{label}</div>
-      <div className="mt-1 text-2xl font-semibold text-slate-100">{value}</div>
-      {sub && <div className="text-xs text-slate-500">{sub}</div>}
+    <div className="rounded-sm border border-cream/10 bg-ink-850 px-4 py-3">
+      <div className="font-mono text-[10.5px] uppercase tracking-[0.08em] text-brass">
+        {label}
+      </div>
+      <div className="mt-1 font-mono text-2xl font-bold text-cream">{value}</div>
+      {sub && <div className="text-xs text-steel">{sub}</div>}
     </div>
   );
 }

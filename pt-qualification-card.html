@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PT QUALIFICATION CARD — NOV ACADEMY PREP</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #1a1f2e;
+    --navy-light: #252b3d;
+    --cream: #f5f0e8;
+    --cream-dim: #e8e0d2;
+    --red: #c41e3a;
+    --green: #2d5f3e;
+    --brass: #8a7456;
+    --steel: #6b7280;
+    --steel-light: #9ca3af;
+    --display: 'Oswald', sans-serif;
+    --body: 'IBM Plex Sans', sans-serif;
+    --mono: 'IBM Plex Mono', monospace;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--navy);
+    color: var(--cream);
+    font-family: var(--body);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap { max-width: 1100px; margin: 0 auto; padding: 0 20px 80px; }
+
+  /* HEADER STRIP */
+  .topstrip {
+    background: var(--cream);
+    color: var(--navy);
+    border-bottom: 6px solid var(--brass);
+    padding: 14px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .topstrip .id {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: var(--steel);
+  }
+  .countdown {
+    font-family: var(--display);
+    font-size: 15px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+  }
+  .countdown .num {
+    font-family: var(--mono);
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--red);
+  }
+
+  header.hero {
+    padding: 56px 0 36px;
+    border-bottom: 1px solid rgba(245,240,232,0.12);
+  }
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--brass);
+    margin-bottom: 14px;
+  }
+  h1 {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: clamp(34px, 6vw, 58px);
+    letter-spacing: 0.01em;
+    text-transform: uppercase;
+    line-height: 1.05;
+    margin-bottom: 16px;
+  }
+  h1 span { color: var(--brass); }
+  .hero-sub {
+    max-width: 640px;
+    color: var(--steel-light);
+    font-size: 16px;
+  }
+
+  /* SECTION LABELS */
+  .section-label {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--brass);
+    margin: 56px 0 18px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(245,240,232,0.12);
+    display: flex;
+    justify-content: space-between;
+  }
+
+  /* QUAL CARD GRID */
+  .qualgrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  @media (max-width: 800px) { .qualgrid { grid-template-columns: 1fr; } }
+
+  .qualcard {
+    background: var(--cream);
+    color: var(--navy);
+    border-radius: 2px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+  }
+  .qualcard-head {
+    background: var(--navy);
+    color: var(--cream);
+    padding: 12px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .qualcard-head .label {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--brass);
+  }
+  .qualcard-body { padding: 20px 16px 16px; }
+  .qualcard-title {
+    font-family: var(--display);
+    font-size: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    margin-bottom: 14px;
+  }
+  .qualcard .nums {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 4px;
+  }
+  .qualcard .current {
+    font-family: var(--mono);
+    font-size: 34px;
+    font-weight: 700;
+  }
+  .qualcard .arrow { color: var(--steel); font-size: 16px; }
+  .qualcard .target {
+    font-family: var(--mono);
+    font-size: 18px;
+    color: var(--steel);
+  }
+  .qualcard .unit { font-size: 12px; color: var(--steel); margin-bottom: 14px; }
+  .barwrap {
+    height: 8px;
+    background: var(--cream-dim);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 8px;
+  }
+  .barfill { height: 100%; border-radius: 4px; transition: width 0.4s ease; }
+  .qualcard .status {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  .status.ontrack { color: var(--green); }
+  .status.behind { color: var(--red); }
+  .status.start { color: var(--steel); }
+  .stamp {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    width: 56px;
+    height: 56px;
+    border: 3px solid var(--red);
+    border-radius: 50%;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    transform: rotate(-12deg);
+    opacity: 0.85;
+  }
+  .stamp.show { display: flex; }
+  .stamp span {
+    font-family: var(--display);
+    font-size: 10px;
+    color: var(--red);
+    text-transform: uppercase;
+    text-align: center;
+    line-height: 1.1;
+  }
+
+  /* WEEKLY SPLIT */
+  .splitgrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 10px;
+  }
+  .dayblock {
+    background: var(--navy-light);
+    border: 1px solid rgba(245,240,232,0.1);
+    border-radius: 4px;
+    padding: 14px 12px;
+  }
+  .dayblock .dnum {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--brass);
+    letter-spacing: 0.08em;
+  }
+  .dayblock .dname {
+    font-family: var(--display);
+    font-size: 16px;
+    text-transform: uppercase;
+    margin: 6px 0 8px;
+  }
+  .dayblock .ddetail {
+    font-size: 12.5px;
+    color: var(--steel-light);
+    line-height: 1.5;
+  }
+  .dayblock.rest { opacity: 0.55; }
+  .dayblock.raceday {
+    background: var(--navy);
+    border: 1px solid var(--red);
+  }
+  .dayblock.raceday .dnum { color: var(--red); }
+
+  .raceflag {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.03em;
+    color: var(--red);
+    background: rgba(196,30,58,0.1);
+    border: 1px solid rgba(196,30,58,0.35);
+    border-radius: 4px;
+    padding: 10px 14px;
+    margin-bottom: 14px;
+  }
+  .raceflag.normal {
+    color: var(--steel-light);
+    background: rgba(245,240,232,0.04);
+    border: 1px solid rgba(245,240,232,0.12);
+  }
+
+  /* PHASE TIMELINE */
+  .phases {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .phase {
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    gap: 20px;
+    padding: 18px 0;
+    border-bottom: 1px solid rgba(245,240,232,0.08);
+  }
+  .phase:last-child { border-bottom: none; }
+  .phase .weeks {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--brass);
+    letter-spacing: 0.04em;
+  }
+  .phase .pname {
+    font-family: var(--display);
+    font-size: 18px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .phase .pdetail { font-size: 13.5px; color: var(--steel-light); }
+
+  /* LOGGING FORM */
+  .logpanel {
+    background: var(--navy-light);
+    border: 1px solid rgba(245,240,232,0.1);
+    border-radius: 4px;
+    padding: 24px;
+  }
+  .logform { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 18px; }
+  @media (max-width: 700px) { .logform { grid-template-columns: 1fr 1fr; } }
+  .field label {
+    display: block;
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--steel-light);
+    margin-bottom: 6px;
+  }
+  .field input, .field select {
+    width: 100%;
+    background: var(--navy);
+    border: 1px solid rgba(245,240,232,0.18);
+    color: var(--cream);
+    font-family: var(--mono);
+    font-size: 14px;
+    padding: 9px 10px;
+    border-radius: 3px;
+  }
+  .field input:focus, .field select:focus { outline: 2px solid var(--brass); }
+  button.logbtn {
+    background: var(--brass);
+    color: var(--navy);
+    border: none;
+    font-family: var(--display);
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 11px 24px;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  button.logbtn:hover { background: #a08862; }
+  button.logbtn:focus-visible { outline: 2px solid var(--cream); }
+
+  .logtable { width: 100%; margin-top: 20px; border-collapse: collapse; font-size: 13px; }
+  .logtable th {
+    text-align: left;
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--steel);
+    padding: 8px 10px;
+    border-bottom: 1px solid rgba(245,240,232,0.15);
+  }
+  .logtable td {
+    padding: 9px 10px;
+    border-bottom: 1px solid rgba(245,240,232,0.06);
+    font-family: var(--mono);
+    color: var(--cream);
+  }
+  .logtable tr:hover { background: rgba(245,240,232,0.03); }
+  .empty-row td { color: var(--steel); font-style: normal; text-align: center; padding: 24px; }
+
+  .delbtn {
+    background: none;
+    border: 1px solid rgba(196,30,58,0.4);
+    color: var(--red);
+    font-family: var(--mono);
+    font-size: 10px;
+    padding: 3px 8px;
+    border-radius: 3px;
+    cursor: pointer;
+    letter-spacing: 0.05em;
+  }
+  .delbtn:hover { background: rgba(196,30,58,0.15); }
+
+  .nutebox {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 4px;
+  }
+  @media (max-width: 700px) { .nutebox { grid-template-columns: 1fr 1fr; } }
+  .nutecard {
+    background: var(--navy-light);
+    border: 1px solid rgba(245,240,232,0.1);
+    border-radius: 4px;
+    padding: 16px;
+  }
+  .nutecard .nval {
+    font-family: var(--mono);
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--brass);
+  }
+  .nutecard .nlabel {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--steel-light);
+    margin-top: 4px;
+  }
+
+  footer {
+    margin-top: 60px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(245,240,232,0.1);
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--steel);
+    letter-spacing: 0.04em;
+  }
+
+  .loading-msg { font-family: var(--mono); font-size: 12px; color: var(--steel); }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="topstrip">
+  <div class="id">FILE: R.SCHMIT // PT-PREP-2026 // ROCKVILLE CENTRE, NY</div>
+  <div class="countdown">DAYS TO ACADEMY <span class="num" id="daysLeft">—</span></div>
+</div>
+
+<div class="wrap">
+
+  <header class="hero">
+    <div class="eyebrow">Nassau County Police Academy — Physical Readiness File</div>
+    <h1>Qualify <span>by</span> November</h1>
+    <p class="hero-sub">Three standards, one clock. 157.6 → 180 lbs. 13:00 → 9:00 on the 1.5-mile. 180 → 225 for reps on squat and bench. Track every entry against the line you actually need to hit.</p>
+  </header>
+
+  <div class="section-label">CURRENT STANDING</div>
+  <div class="qualgrid" id="qualgrid"></div>
+
+  <div class="section-label">NUTRITION TARGETS <span id="weekOfNute"></span></div>
+  <div class="nutebox" id="nutebox"></div>
+
+  <div class="section-label">WEEKLY SPLIT — THIS WEEK</div>
+  <div id="splitFlag"></div>
+  <div class="splitgrid" id="splitgrid"></div>
+
+  <div class="section-label">PHASE PLAN — 20 WEEKS</div>
+  <div class="phases" id="phases"></div>
+
+  <div class="section-label">LOG AN ENTRY</div>
+  <div class="logpanel">
+    <div class="logform">
+      <div class="field">
+        <label for="logType">Metric</label>
+        <select id="logType">
+          <option value="weight">Bodyweight (lbs)</option>
+          <option value="run">Run Time — training or race (min.sec, e.g. 12.30)</option>
+          <option value="squat">Squat — weight x reps</option>
+          <option value="bench">Bench — weight x reps</option>
+        </select>
+      </div>
+      <div class="field" id="valueFieldWrap">
+        <label for="logValue">Value</label>
+        <input id="logValue" type="text" placeholder="e.g. 162.4">
+      </div>
+      <div class="field" id="repsFieldWrap" style="display:none;">
+        <label for="logReps">Reps</label>
+        <input id="logReps" type="number" placeholder="e.g. 5">
+      </div>
+      <div class="field">
+        <label for="logDate">Date</label>
+        <input id="logDate" type="date">
+      </div>
+    </div>
+    <button class="logbtn" id="addEntryBtn">Log Entry</button>
+    <table class="logtable" id="logtable">
+      <thead>
+        <tr><th>Date</th><th>Metric</th><th>Value</th><th></th></tr>
+      </thead>
+      <tbody id="logtableBody"></tbody>
+    </table>
+  </div>
+
+  <footer>
+    DATA STORED LOCALLY TO THIS ARTIFACT · GOALS: 180 LBS BODYWEIGHT / 9:00 1.5MI / 225 LBS SQUAT &amp; BENCH FOR REPS · TARGET: NOVEMBER 2026
+  </footer>
+
+</div>
+
+<script>
+const ACADEMY_START = new Date('2026-11-02T00:00:00');
+const START_DATE = new Date('2026-06-22T00:00:00');
+const TOTAL_DAYS = Math.round((ACADEMY_START - START_DATE) / 86400000);
+
+const GOALS = {
+  weight: { start: 157.6, target: 180, unit: 'lbs', label: 'Bodyweight', dir: 'up' },
+  run: { start: 13.0, target: 9.0, unit: 'min', label: '1.5 Mile Run', dir: 'down' },
+  squat: { start: 180, target: 225, unit: 'lbs', label: 'Squat (1RM est.)', dir: 'up' },
+  bench: { start: 180, target: 225, unit: 'lbs', label: 'Bench (1RM est.)', dir: 'up' }
+};
+
+let entries = [];
+
+function todayStr() {
+  return new Date().toISOString().slice(0,10);
+}
+
+function daysLeft() {
+  const now = new Date();
+  const diff = Math.round((ACADEMY_START - now) / 86400000);
+  return Math.max(diff, 0);
+}
+
+function pctElapsed() {
+  const now = new Date();
+  const elapsed = (now - START_DATE) / 86400000;
+  return Math.min(Math.max(elapsed / TOTAL_DAYS, 0), 1);
+}
+
+function latestValue(metric) {
+  const rows = entries.filter(e => e.type === metric).sort((a,b) => new Date(a.date) - new Date(b.date));
+  if (rows.length === 0) return GOALS[metric].start;
+  return rows[rows.length - 1].numericValue;
+}
+
+function expectedProgressPct() {
+  // linear expected progress based on time elapsed - used to flag "behind" status
+  return pctElapsed();
+}
+
+function renderQualCards() {
+  const grid = document.getElementById('qualgrid');
+  grid.innerHTML = '';
+  const order = ['weight', 'run', 'squat', 'bench'];
+  // combine squat/bench into a strength duo display, but weight/run get own cards.
+  // We'll do 3 cards: WEIGHT, RUN, STRENGTH (showing both squat+bench)
+
+  const w = latestValue('weight');
+  const r = latestValue('run');
+  const sq = latestValue('squat');
+  const bn = latestValue('bench');
+
+  const expPct = expectedProgressPct();
+
+  function progressFrac(metric, current) {
+    const g = GOALS[metric];
+    if (g.dir === 'up') {
+      return Math.min(Math.max((current - g.start) / (g.target - g.start), 0), 1);
+    } else {
+      return Math.min(Math.max((g.start - current) / (g.start - g.target), 0), 1);
+    }
+  }
+
+  function statusFor(frac) {
+    if (frac >= expPct * 0.9) return { cls: 'ontrack', text: 'ON TRACK' };
+    if (entries.length === 0) return { cls: 'start', text: 'NOT STARTED' };
+    return { cls: 'behind', text: 'BEHIND PACE' };
+  }
+
+  function card(title, current, target, unit, frac, statusObj, extra) {
+    const barColor = statusObj.cls === 'ontrack' ? 'var(--green)' : statusObj.cls === 'behind' ? 'var(--red)' : 'var(--steel)';
+    return `
+      <div class="qualcard">
+        <div class="qualcard-head">
+          <span class="label">QUAL STANDARD</span>
+          <span class="label">${Math.round(frac*100)}%</span>
+        </div>
+        <div class="qualcard-body">
+          <div class="qualcard-title">${title}</div>
+          <div class="nums">
+            <span class="current">${current}</span>
+            <span class="arrow">&#8594;</span>
+            <span class="target">${target}</span>
+          </div>
+          <div class="unit">${unit}</div>
+          <div class="barwrap"><div class="barfill" style="width:${frac*100}%; background:${barColor};"></div></div>
+          <div class="status ${statusObj.cls}">${statusObj.text}</div>
+          ${extra || ''}
+        </div>
+        <div class="stamp ${frac >= 1 ? 'show' : ''}"><span>QUALI&shy;FIED</span></div>
+      </div>
+    `;
+  }
+
+  const wFrac = progressFrac('weight', w);
+  const rFrac = progressFrac('run', r);
+  const sqFrac = progressFrac('squat', sq);
+  const bnFrac = progressFrac('bench', bn);
+  const strFrac = (sqFrac + bnFrac) / 2;
+
+  grid.innerHTML =
+    card('Bodyweight', w.toFixed(1), '180', 'lbs · lean gain pace', wFrac, statusFor(wFrac)) +
+    card('1.5 Mile Run', fmtRunTime(r), '9:00', 'min:sec', rFrac, statusFor(rFrac)) +
+    card('Squat &amp; Bench', `${sq}/${bn}`, '225/225', 'est. 1RM, lbs (squat/bench)', strFrac, statusFor(strFrac));
+}
+
+function fmtRunTime(decimalMin) {
+  const mins = Math.floor(decimalMin);
+  const secs = Math.round((decimalMin - mins) * 100);
+  return `${mins}:${secs.toString().padStart(2,'0')}`;
+}
+
+function renderNutrition() {
+  const w = latestValue('weight');
+  const protein = Math.round(w * 0.9);
+  const calories = Math.round(w * 17.5); // moderate surplus for lean gain
+  const carbs = Math.round((calories * 0.4) / 4);
+  const fat = Math.round((calories * 0.25) / 9);
+  document.getElementById('nutebox').innerHTML = `
+    <div class="nutecard"><div class="nval">${calories}</div><div class="nlabel">Calories / day</div></div>
+    <div class="nutecard"><div class="nval">${protein}g</div><div class="nlabel">Protein / day</div></div>
+    <div class="nutecard"><div class="nval">${carbs}g</div><div class="nlabel">Carbs / day (approx)</div></div>
+    <div class="nutecard"><div class="nval">${fat}g</div><div class="nlabel">Fat / day (approx)</div></div>
+  `;
+  document.getElementById('weekOfNute').textContent = `— based on current weight (${w.toFixed(1)} lbs)`;
+}
+
+const SPLIT_RACE_WEEK = [
+  { d: 'MON', name: 'Race — Summer Series', detail: 'LI Summer Run Series at race effort. Distance varies by week (5K-5mi) — this IS the quality run session, run it hard.' },
+  { d: 'TUE', name: 'Push (light-moderate)', detail: 'Bench, OHP, incline DB press. Drop top set ~10% off plan — legs from the race bleed into upper body recovery less, but keep volume sane.' },
+  { d: 'WED', name: 'Legs — Squat Focus', detail: 'Push this back to Wednesday so quads get 48hrs off the race before loading. Squat top set + backoffs, RDLs, core.' },
+  { d: 'THU', name: 'Back + Bi', detail: 'Rows, pulldowns, deadlift variant, curls. Pull volume day, unaffected by race.' },
+  { d: 'FRI', name: 'Run — Easy/Recovery + PT Circuit', detail: 'Easy-paced run (not tempo this week) + push-up/sit-up max-rep practice. Let the legs recover for Saturday.' },
+  { d: 'SAT', name: 'Legs — Light + Long Run', detail: 'Lighter squat/accessory load + aerobic long run. Two leg-demanding sessions this week (race + this) so keep volume conservative.' },
+  { d: 'SUN', name: 'Rest', detail: 'Full recovery before next Monday\'s race. Mobility, sleep, food prep.' }
+];
+
+const SPLIT_NORMAL = [
+  { d: '01', name: 'Push', detail: 'Bench, OHP, incline DB press, triceps. Top set + backoffs, progressive load.' },
+  { d: '02', name: 'Run — Intervals', detail: '400-800m repeats at target race pace. Builds VO2 + run economy.' },
+  { d: '03', name: 'Legs — Squat Focus', detail: 'Squat top set + backoffs, RDLs, leg press, core. Heaviest leg day.' },
+  { d: '04', name: 'Back + Bi', detail: 'Rows, pulldowns, deadlift variant, curls. Pull volume day.' },
+  { d: '05', name: 'Run — Tempo + Push-ups/Sit-ups', detail: 'Tempo run + full PT-test circuit: max push-ups, max sit-ups, technique work.' },
+  { d: '06', name: 'Legs — Long Run', detail: 'Lighter squat/accessory work + long steady-state run (building aerobic base).' },
+  { d: '07', name: 'Rest', detail: 'Full recovery. Mobility, sleep, food prep for the week ahead.' }
+];
+
+// Mondays with a confirmed/likely Summer Series race. 6/22 was cancelled per organizer;
+// series resumes the following Monday and continues weekly through the published schedule.
+const RACE_WEEK_MONDAYS = ['2026-06-29', '2026-07-13', '2026-07-20', '2026-08-03', '2026-08-10'];
+
+function getThisMonday() {
+  const now = new Date();
+  const day = now.getDay(); // 0 = Sun
+  const diffToMonday = day === 0 ? -6 : 1 - day;
+  const monday = new Date(now);
+  monday.setDate(now.getDate() + diffToMonday);
+  monday.setHours(0,0,0,0);
+  return monday.toISOString().slice(0,10);
+}
+
+function isRaceWeek() {
+  return RACE_WEEK_MONDAYS.includes(getThisMonday());
+}
+
+function renderSplit() {
+  const raceWeek = isRaceWeek();
+  const split = raceWeek ? SPLIT_RACE_WEEK : SPLIT_NORMAL;
+  const banner = raceWeek
+    ? `<div class="raceflag">RACE WEEK — Monday's Summer Series run replaces interval day. Squat day shifted to Wednesday for recovery.</div>`
+    : `<div class="raceflag normal">NO RACE THIS WEEK — standard 6-day rotation, interval session on day 2.</div>`;
+  document.getElementById('splitFlag').innerHTML = banner;
+  document.getElementById('splitgrid').innerHTML = split.map(s => `
+    <div class="dayblock ${s.name === 'Rest' ? 'rest' : ''} ${s.name.startsWith('Race') ? 'raceday' : ''}">
+      <div class="dnum">${s.d}</div>
+      <div class="dname">${s.name}</div>
+      <div class="ddetail">${s.detail}</div>
+    </div>
+  `).join('');
+}
+
+const PHASES = [
+  { weeks: 'WK 1–6', name: 'Base Build', detail: 'Establish surplus (~+300-400 kcal), linear strength progression on squat/bench (add 5lbs/week as reps allow). Monday Summer Series races sub in for interval day when scheduled — otherwise 2x interval + 1x long run per week. Run pace target: 12:00.' },
+  { weeks: 'WK 7–12', name: 'Strength Push', detail: 'Continue progressive overload toward 1RM ~240-250 on squat/bench via 4-6 rep top sets. Use remaining Summer Series races as free speed/fitness checks against the 9:00 goal. Run pace target: 10:30.' },
+  { weeks: 'WK 13–17', name: 'Rep Conversion', detail: 'Shift squat/bench to backoff sets at 225 for reps (work up to 5x5 @ 225). Sharpen run pacing with race-pace intervals at sub-9:00 splits. Begin slight calorie trim if bodyweight gain is ahead of schedule to protect run times.' },
+  { weeks: 'WK 18–20', name: 'Taper & Test', detail: 'Reduce volume 30-40%, keep intensity high. Practice full PT test conditions (run, push-ups, sit-ups back-to-back) twice. Final 1RM/rep tests in week 19, full rest 48-72hrs before academy intake.' }
+];
+
+function renderPhases() {
+  document.getElementById('phases').innerHTML = PHASES.map(p => `
+    <div class="phase">
+      <div class="weeks">${p.weeks}</div>
+      <div>
+        <div class="pname">${p.name}</div>
+        <div class="pdetail">${p.detail}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderLogTable() {
+  const body = document.getElementById('logtableBody');
+  if (entries.length === 0) {
+    body.innerHTML = `<tr class="empty-row"><td colspan="4">No entries logged yet. Add your first data point above.</td></tr>`;
+    return;
+  }
+  const sorted = [...entries].sort((a,b) => new Date(b.date) - new Date(a.date));
+  body.innerHTML = sorted.map(e => `
+    <tr>
+      <td>${e.date}</td>
+      <td>${GOALS[e.type] ? GOALS[e.type].label : e.type}</td>
+      <td>${e.display}</td>
+      <td><button class="delbtn" data-id="${e.id}">REMOVE</button></td>
+    </tr>
+  `).join('');
+  body.querySelectorAll('.delbtn').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      const id = btn.getAttribute('data-id');
+      entries = entries.filter(e => e.id !== id);
+      await saveEntries();
+      renderAll();
+    });
+  });
+}
+
+async function saveEntries() {
+  try {
+    await window.storage.set('pt-prep-entries', JSON.stringify(entries), false);
+  } catch (err) {
+    console.error('Failed to save entries', err);
+  }
+}
+
+async function loadEntries() {
+  try {
+    const result = await window.storage.get('pt-prep-entries', false);
+    if (result && result.value) {
+      entries = JSON.parse(result.value);
+    }
+  } catch (err) {
+    entries = [];
+  }
+}
+
+function renderAll() {
+  document.getElementById('daysLeft').textContent = daysLeft();
+  renderQualCards();
+  renderNutrition();
+  renderLogTable();
+}
+
+document.getElementById('logType').addEventListener('change', (e) => {
+  const isStrength = e.target.value === 'squat' || e.target.value === 'bench';
+  document.getElementById('repsFieldWrap').style.display = isStrength ? 'block' : 'none';
+  const valLabel = document.querySelector('#valueFieldWrap label');
+  if (e.target.value === 'weight') { valLabel.textContent = 'Value (lbs)'; document.getElementById('logValue').placeholder = 'e.g. 162.4'; }
+  else if (e.target.value === 'run') { valLabel.textContent = 'Time (min.sec)'; document.getElementById('logValue').placeholder = 'e.g. 12.30'; }
+  else { valLabel.textContent = 'Weight Lifted (lbs)'; document.getElementById('logValue').placeholder = 'e.g. 195'; }
+});
+
+document.getElementById('addEntryBtn').addEventListener('click', async () => {
+  const type = document.getElementById('logType').value;
+  const rawVal = document.getElementById('logValue').value.trim();
+  const reps = document.getElementById('logReps').value.trim();
+  const date = document.getElementById('logDate').value || todayStr();
+
+  if (!rawVal) return;
+
+  let numericValue, display;
+
+  if (type === 'weight') {
+    numericValue = parseFloat(rawVal);
+    display = `${numericValue.toFixed(1)} lbs`;
+  } else if (type === 'run') {
+    numericValue = parseFloat(rawVal);
+    display = fmtRunTime(numericValue);
+  } else {
+    // squat/bench: estimate 1RM using Epley if reps > 1, else raw value
+    const weightLifted = parseFloat(rawVal);
+    const r = parseInt(reps) || 1;
+    const est1RM = r > 1 ? Math.round(weightLifted * (1 + r/30)) : weightLifted;
+    numericValue = est1RM;
+    display = `${weightLifted} x ${r} (est. 1RM ${est1RM})`;
+  }
+
+  if (isNaN(numericValue)) return;
+
+  entries.push({
+    id: Date.now().toString() + Math.random().toString(36).slice(2,7),
+    type, date, numericValue, display
+  });
+
+  await saveEntries();
+  document.getElementById('logValue').value = '';
+  document.getElementById('logReps').value = '';
+  renderAll();
+});
+
+document.getElementById('logDate').value = todayStr();
+
+(async function init() {
+  await loadEntries();
+  renderSplit();
+  renderPhases();
+  renderAll();
+})();
+</script>
+
+</body>
+</html>

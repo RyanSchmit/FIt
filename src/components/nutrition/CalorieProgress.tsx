@@ -25,8 +25,8 @@ function Bar({
   return (
     <div>
       <div className="mb-1 flex items-baseline justify-between text-sm">
-        <span className="font-medium text-slate-200">{label}</span>
-        <span className="font-mono text-xs text-slate-400">
+        <span className="font-medium text-cream">{label}</span>
+        <span className="font-mono text-xs text-steel-light">
           {Math.round(value)} / {Math.round(target)} {unit}
         </span>
       </div>
@@ -38,11 +38,11 @@ function Bar({
       </div>
       <div className="mt-1 text-xs">
         {over ? (
-          <span className="text-emerald-300">
+          <span className="text-[#5fae77]">
             Target hit - {Math.round(value - target)} {unit} over
           </span>
         ) : (
-          <span className="text-slate-500">
+          <span className="text-steel">
             {remaining} {unit} left today
           </span>
         )}
@@ -53,22 +53,24 @@ function Bar({
 
 export default function CalorieProgress({ totals, settings }: Props) {
   return (
-    <div className="rounded-2xl border border-ink-700 bg-ink-900/70 p-5">
-      <h2 className="mb-4 text-sm font-semibold text-slate-200">Today</h2>
+    <div className="rounded-sm border border-cream/10 bg-ink-900 p-5">
+      <h2 className="mb-4 font-mono text-xs uppercase tracking-[0.14em] text-brass">
+        Today
+      </h2>
       <div className="flex flex-col gap-4">
         <Bar
           label="Calories"
           value={totals.calories}
           target={settings.calorieTarget}
           unit="kcal"
-          tint="bg-accent"
+          tint="bg-brass"
         />
         <Bar
           label="Protein"
           value={totals.protein}
           target={settings.proteinTarget}
           unit="g"
-          tint="bg-emerald-400"
+          tint="bg-[#3f8557]"
         />
       </div>
     </div>

@@ -48,12 +48,12 @@ export default function StrengthDashboard({ sets, onCsv, sourceName }: Props) {
       <FileDrop onCsv={onCsv} currentName={sourceName} />
 
       {sets.length === 0 ? (
-        <div className="rounded-2xl border border-ink-700 bg-ink-900/70 px-4 py-12 text-center text-sm text-slate-500">
+        <div className="rounded-sm border border-cream/10 bg-ink-900 px-4 py-12 text-center text-sm text-steel">
           Drop a Strong CSV export above to begin.
         </div>
       ) : (
         <>
-          <section className="rounded-2xl border border-ink-700 bg-ink-900/70 p-5">
+          <section className="rounded-sm border border-cream/10 bg-ink-900 p-5">
             <Controls
               exercises={exercises}
               exercise={exercise}
@@ -67,7 +67,7 @@ export default function StrengthDashboard({ sets, onCsv, sourceName }: Props) {
           <StatsHeader stats={stats} />
 
           {!enoughData ? (
-            <div className="rounded-2xl border border-amber-500/30 bg-amber-500/10 px-4 py-6 text-sm text-amber-200">
+            <div className="rounded-sm border border-brass/40 bg-brass/10 px-4 py-6 text-sm text-cream">
               Only {sessions.length} session(s) recorded for {exercise}. Pick a lift with at
               least {MIN_SESSIONS} sessions for a meaningful factor analysis.
             </div>

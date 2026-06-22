@@ -89,17 +89,19 @@ export default function WeightDashboard() {
   const fmtDelta = (d: number) =>
     `${d > 0 ? "+" : d < 0 ? "" : ""}${d.toFixed(1)} lb`;
   const deltaColor = (d: number) =>
-    d > 0 ? "text-[#34d399]" : d < 0 ? "text-[#f472b6]" : "text-slate-400";
+    d > 0 ? "text-[#3f8557]" : d < 0 ? "text-[#c41e3a]" : "text-steel-light";
 
   const recent = [...entries].reverse();
 
   return (
     <div className="flex flex-col gap-6">
-      <div className="rounded-2xl border border-ink-700 bg-ink-900/70 p-5">
-        <h2 className="mb-4 text-sm font-semibold text-slate-200">Log weight</h2>
+      <div className="rounded-sm border border-cream/10 bg-ink-900 p-5">
+        <h2 className="mb-4 font-mono text-xs uppercase tracking-[0.14em] text-brass">
+          Log Weight
+        </h2>
         <form onSubmit={handleAdd} className="flex flex-wrap items-end gap-3">
           <label className="flex flex-col gap-1">
-            <span className="text-xs font-medium text-slate-400">Weight (lb)</span>
+            <span className="font-mono text-[10.5px] uppercase tracking-[0.08em] text-steel-light">Weight (lb)</span>
             <input
               type="number"
               step="0.1"
@@ -107,85 +109,87 @@ export default function WeightDashboard() {
               value={weight}
               onChange={(e) => setWeight(e.target.value)}
               placeholder="161"
-              className="w-32 rounded-lg border border-ink-700 bg-ink-850 px-3 py-2 text-sm text-slate-100 outline-none focus:border-accent"
+              className="w-32 rounded-sm border border-cream/[0.18] bg-ink-850 px-3 py-2 text-sm text-cream outline-none focus:border-brass"
             />
           </label>
           <label className="flex flex-col gap-1">
-            <span className="text-xs font-medium text-slate-400">Date &amp; time</span>
+            <span className="font-mono text-[10.5px] uppercase tracking-[0.08em] text-steel-light">Date &amp; time</span>
             <input
               type="datetime-local"
               value={when}
               onChange={(e) => setWhen(e.target.value)}
-              className="rounded-lg border border-ink-700 bg-ink-850 px-3 py-2 text-sm text-slate-100 outline-none focus:border-accent"
+              className="rounded-sm border border-cream/[0.18] bg-ink-850 px-3 py-2 text-sm text-cream outline-none focus:border-brass"
             />
           </label>
           <label className="flex flex-1 flex-col gap-1">
-            <span className="text-xs font-medium text-slate-400">
-              Note <span className="text-slate-600">(optional)</span>
+            <span className="font-mono text-[10.5px] uppercase tracking-[0.08em] text-steel-light">
+              Note <span className="text-steel">(optional)</span>
             </span>
             <input
               type="text"
               value={note}
               onChange={(e) => setNote(e.target.value)}
               placeholder="e.g. morning, post-workout"
-              className="w-full min-w-[10rem] rounded-lg border border-ink-700 bg-ink-850 px-3 py-2 text-sm text-slate-100 outline-none focus:border-accent"
+              className="w-full min-w-[10rem] rounded-sm border border-cream/[0.18] bg-ink-850 px-3 py-2 text-sm text-cream outline-none focus:border-brass"
             />
           </label>
           <button
             type="submit"
-            className="rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-ink-950 hover:bg-accent-strong"
+            className="rounded-sm bg-brass px-4 py-2 font-display text-sm uppercase tracking-[0.04em] text-ink-950 hover:bg-accent-strong"
           >
             Add
           </button>
         </form>
-        {errorMsg && <p className="mt-2 text-xs text-red-400">{errorMsg}</p>}
+        {errorMsg && <p className="mt-2 text-xs text-red">{errorMsg}</p>}
 
         <div className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-4">
-          <div className="rounded-xl border border-ink-700 bg-ink-850 px-3 py-2">
-            <div className="text-xs text-slate-500">Latest</div>
-            <div className="text-lg font-semibold text-slate-100">
+          <div className="rounded-sm border border-cream/10 bg-ink-850 px-3 py-2">
+            <div className="font-mono text-[10.5px] uppercase tracking-[0.06em] text-brass">Latest</div>
+            <div className="font-mono text-lg font-bold text-cream">
               {latest ? `${latest.weightLb} lb` : "--"}
             </div>
           </div>
-          <div className="rounded-xl border border-ink-700 bg-ink-850 px-3 py-2">
-            <div className="text-xs text-slate-500">Since last</div>
-            <div className={`text-lg font-semibold ${deltaColor(sincePrev)}`}>
+          <div className="rounded-sm border border-cream/10 bg-ink-850 px-3 py-2">
+            <div className="font-mono text-[10.5px] uppercase tracking-[0.06em] text-brass">Since last</div>
+            <div className={`font-mono text-lg font-bold ${deltaColor(sincePrev)}`}>
               {prev ? fmtDelta(sincePrev) : "--"}
             </div>
           </div>
-          <div className="rounded-xl border border-ink-700 bg-ink-850 px-3 py-2">
-            <div className="text-xs text-slate-500">Since start</div>
-            <div className={`text-lg font-semibold ${deltaColor(sinceStart)}`}>
+          <div className="rounded-sm border border-cream/10 bg-ink-850 px-3 py-2">
+            <div className="font-mono text-[10.5px] uppercase tracking-[0.06em] text-brass">Since start</div>
+            <div className={`font-mono text-lg font-bold ${deltaColor(sinceStart)}`}>
               {first ? fmtDelta(sinceStart) : "--"}
             </div>
           </div>
-          <div className="rounded-xl border border-ink-700 bg-ink-850 px-3 py-2">
-            <div className="text-xs text-slate-500">Entries</div>
-            <div className="text-lg font-semibold text-slate-100">{entries.length}</div>
+          <div className="rounded-sm border border-cream/10 bg-ink-850 px-3 py-2">
+            <div className="font-mono text-[10.5px] uppercase tracking-[0.06em] text-brass">Entries</div>
+            <div className="font-mono text-lg font-bold text-cream">{entries.length}</div>
           </div>
         </div>
       </div>
 
       <WeightChart entries={entries} />
 
-      <div className="rounded-2xl border border-ink-700 bg-ink-900/70 p-5">
-        <h2 className="mb-3 text-sm font-semibold text-slate-200">Recent entries</h2>
+      <div className="rounded-sm border border-cream/10 bg-ink-900 p-5">
+        <h2 className="mb-3 font-mono text-xs uppercase tracking-[0.14em] text-brass">
+          Recent Entries
+        </h2>
         {recent.length === 0 ? (
-          <p className="py-6 text-center text-sm text-slate-500">No entries yet.</p>
+          <p className="py-6 text-center text-sm text-steel">No entries yet.</p>
         ) : (
           <ul className="flex flex-col gap-2">
             {recent.slice(0, 30).map((e) =>
               editingId === e.id ? (
                 <li
                   key={e.id}
-                  className="rounded-xl border border-accent/60 bg-ink-850 px-3 py-3"
+                  className="rounded-sm border border-brass/60 bg-ink-850 px-3 py-3"
                 >
                   <form
                     onSubmit={handleSaveEdit}
                     className="flex flex-wrap items-end gap-3"
                   >
                     <label className="flex flex-col gap-1">
-                      <span className="text-xs font-medium text-slate-400">
+                      <span className="font-mono text-[10.5px] uppercase tracking-[0.08em] text-steel-light">
                         Weight (lb)
                       </span>
                       <input
@@ -194,66 +198,66 @@ export default function WeightDashboard() {
                         inputMode="decimal"
                         value={editWeight}
                         onChange={(ev) => setEditWeight(ev.target.value)}
-                        className="w-28 rounded-lg border border-ink-700 bg-ink-900 px-3 py-2 text-sm text-slate-100 outline-none focus:border-accent"
+                        className="w-28 rounded-sm border border-cream/[0.18] bg-ink-900 px-3 py-2 text-sm text-cream outline-none focus:border-brass"
                       />
                     </label>
                     <label className="flex flex-col gap-1">
-                      <span className="text-xs font-medium text-slate-400">
+                      <span className="font-mono text-[10.5px] uppercase tracking-[0.08em] text-steel-light">
                         Date &amp; time
                       </span>
                       <input
                         type="datetime-local"
                         value={editWhen}
                         onChange={(ev) => setEditWhen(ev.target.value)}
-                        className="rounded-lg border border-ink-700 bg-ink-900 px-3 py-2 text-sm text-slate-100 outline-none focus:border-accent"
+                        className="rounded-sm border border-cream/[0.18] bg-ink-900 px-3 py-2 text-sm text-cream outline-none focus:border-brass"
                       />
                     </label>
                     <label className="flex flex-1 flex-col gap-1">
-                      <span className="text-xs font-medium text-slate-400">
-                        Note <span className="text-slate-600">(optional)</span>
+                      <span className="font-mono text-[10.5px] uppercase tracking-[0.08em] text-steel-light">
+                        Note <span className="text-steel">(optional)</span>
                       </span>
                       <input
                         type="text"
                         value={editNote}
                         onChange={(ev) => setEditNote(ev.target.value)}
                         placeholder="e.g. morning, post-workout"
-                        className="w-full min-w-[10rem] rounded-lg border border-ink-700 bg-ink-900 px-3 py-2 text-sm text-slate-100 outline-none focus:border-accent"
+                        className="w-full min-w-[10rem] rounded-sm border border-cream/[0.18] bg-ink-900 px-3 py-2 text-sm text-cream outline-none focus:border-brass"
                       />
                     </label>
                     <button
                       type="submit"
-                      className="rounded-lg bg-accent px-3 py-2 text-sm font-semibold text-ink-950 hover:bg-accent-strong"
+                      className="rounded-sm bg-brass px-3 py-2 font-display text-sm uppercase tracking-[0.04em] text-ink-950 hover:bg-accent-strong"
                     >
                       Save
                     </button>
                     <button
                       type="button"
                       onClick={cancelEdit}
-                      className="rounded-lg border border-ink-700 px-3 py-2 text-sm font-medium text-slate-300 hover:bg-ink-800"
+                      className="rounded-sm border border-cream/[0.18] px-3 py-2 text-sm font-medium text-steel-light hover:bg-ink-800"
                     >
                       Cancel
                     </button>
                     {editError && (
-                      <p className="w-full text-xs text-red-400">{editError}</p>
+                      <p className="w-full text-xs text-red">{editError}</p>
                     )}
                   </form>
                 </li>
               ) : (
                 <li
                   key={e.id}
-                  className="flex items-center justify-between rounded-xl border border-ink-700 bg-ink-850 px-3 py-2"
+                  className="flex items-center justify-between rounded-sm border border-cream/10 bg-ink-850 px-3 py-2"
                 >
                   <div className="min-w-0">
                     <div>
-                      <span className="text-sm font-semibold text-slate-100">
+                      <span className="font-mono text-sm font-semibold text-cream">
                         {e.weightLb} lb
                       </span>
-                      <span className="ml-3 text-xs text-slate-500">
+                      <span className="ml-3 font-mono text-xs text-steel">
                         {new Date(e.recordedAt).toLocaleString()}
                       </span>
                     </div>
                     {e.note && (
-                      <p className="mt-0.5 truncate text-xs italic text-slate-400">
+                      <p className="mt-0.5 truncate text-xs italic text-steel-light">
                         {e.note}
                       </p>
                     )}
@@ -263,13 +267,13 @@ export default function WeightDashboard() {
                       onClick={() =>
                         startEdit(e.id, e.weightLb, e.recordedAt, e.note)
                       }
-                      className="rounded-md px-2 py-1 text-xs text-slate-500 transition-colors hover:bg-accent/10 hover:text-accent"
+                      className="rounded-sm px-2 py-1 text-xs text-steel transition-colors hover:bg-brass/10 hover:text-brass"
                     >
                       Edit
                     </button>
                     <button
                       onClick={() => removeEntry(e.id)}
-                      className="rounded-md px-2 py-1 text-xs text-slate-500 transition-colors hover:bg-red-500/10 hover:text-red-400"
+                      className="rounded-sm px-2 py-1 text-xs text-steel transition-colors hover:bg-red/10 hover:text-red"
                     >
                       Remove
                     </button>

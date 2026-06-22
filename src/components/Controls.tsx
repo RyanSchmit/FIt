@@ -24,10 +24,10 @@ export default function Controls({
           <button
             key={q}
             onClick={() => onExercise(q)}
-            className={`rounded-full px-3 py-1.5 text-xs font-medium transition ${
+            className={`rounded-sm px-3 py-1.5 font-mono text-xs uppercase tracking-[0.04em] transition ${
               exercise === q
-                ? "bg-accent text-ink-950"
-                : "bg-ink-800 text-slate-300 hover:bg-ink-700"
+                ? "bg-brass text-ink-950"
+                : "bg-ink-800 text-steel-light hover:bg-ink-700"
             }`}
           >
             {q}
@@ -36,12 +36,12 @@ export default function Controls({
       </div>
 
       <div className="grid gap-4 sm:grid-cols-2">
-        <label className="flex flex-col gap-1.5 text-xs text-slate-400">
+        <label className="flex flex-col gap-1.5 font-mono text-[10.5px] uppercase tracking-[0.08em] text-steel-light">
           Exercise
           <select
             value={exercise}
             onChange={(e) => onExercise(e.target.value)}
-            className="rounded-lg border border-ink-700 bg-ink-850 px-3 py-2 text-sm text-slate-100 outline-none focus:border-accent"
+            className="rounded-sm border border-cream/[0.18] bg-ink-850 px-3 py-2 text-sm text-cream outline-none focus:border-brass"
           >
             {exercises.map((ex) => (
               <option key={ex} value={ex}>
@@ -51,9 +51,9 @@ export default function Controls({
           </select>
         </label>
 
-        <label className="flex flex-col gap-1.5 text-xs text-slate-400">
+        <label className="flex flex-col gap-1.5 font-mono text-[10.5px] uppercase tracking-[0.08em] text-steel-light">
           Improvement metric
-          <div className="flex overflow-hidden rounded-lg border border-ink-700">
+          <div className="flex overflow-hidden rounded-sm border border-cream/[0.18]">
             {(
               [
                 ["e1rm", "Est. 1RM"],
@@ -65,8 +65,8 @@ export default function Controls({
                 onClick={() => onMetric(key)}
                 className={`flex-1 px-2 py-2 text-sm transition ${
                   metric === key
-                    ? "bg-accent text-ink-950"
-                    : "bg-ink-850 text-slate-300 hover:bg-ink-800"
+                    ? "bg-brass text-ink-950"
+                    : "bg-ink-850 text-steel-light hover:bg-ink-800"
                 }`}
               >
                 {label}

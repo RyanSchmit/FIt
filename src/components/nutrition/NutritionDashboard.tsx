@@ -41,7 +41,7 @@ export default function NutritionDashboard({ sets }: Props) {
 
       <IntakeAnalytics log={store.log} sets={sets} />
 
-      <footer className="pb-4 pt-2 text-center text-xs text-slate-600">
+      <footer className="pb-4 pt-2 text-center font-mono text-[11px] tracking-[0.04em] text-steel">
         Your calorie targets and daily intake are saved locally in this browser.
         Nothing leaves your machine.
       </footer>

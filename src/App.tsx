@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import NutritionDashboard from "./components/nutrition/NutritionDashboard";
-import PlanDashboard from "./components/plan/PlanDashboard";
+import PtQualificationDashboard from "./components/plan/PtQualificationDashboard";
 import StrengthDashboard from "./components/StrengthDashboard";
 import WeightDashboard from "./components/weight/WeightDashboard";
 import { exercisesByFrequency, parseStrongCsv } from "./lib/parse";
@@ -111,7 +111,7 @@ const TABS: { key: Tab; label: string; blurb: string }[] = [
     key: "plan",
     label: "Plan",
     blurb:
-      "Follow your 8-week hybrid strength + running program. Weights and run targets auto-progress each week - tap to log your actual top sets and runs.",
+      "Your PT qualification card for the Nassau County Police Academy. Track bodyweight, 1.5-mile run, and squat/bench against the standards you need to hit by November.",
   },
 ];
 
@@ -166,10 +166,10 @@ export default function App() {
 
   return (
     <div className="min-h-full">
-      <nav className="sticky top-0 z-30 border-b border-ink-700 bg-ink-950/80 backdrop-blur">
+      <nav className="sticky top-0 z-30 border-b-2 border-brass bg-ink-950/90 backdrop-blur">
         <div className="mx-auto flex max-w-6xl items-center gap-4 px-4 py-3 sm:px-6">
           <div className="flex items-center gap-2.5">
-            <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-accent text-ink-950">
+            <span className="flex h-8 w-8 items-center justify-center rounded-sm bg-brass text-ink-950">
               <svg
                 width="18"
                 height="18"
@@ -189,8 +189,8 @@ export default function App() {
                 <path d="m14 21 7-7" />
               </svg>
             </span>
-            <span className="text-base font-bold tracking-tight text-slate-50">
-              Lift &amp; Bulk
+            <span className="font-display text-base font-bold uppercase tracking-[0.06em] text-cream">
+              PT Prep
             </span>
           </div>
 
@@ -203,10 +203,10 @@ export default function App() {
                   key={t.key}
                   onClick={() => setTab(t.key)}
                   aria-current={isActive ? "page" : undefined}
-                  className={`flex shrink-0 items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium transition ${
+                  className={`flex shrink-0 items-center gap-2 rounded-sm px-3 py-2 font-mono text-xs uppercase tracking-[0.06em] transition ${
                     isActive
-                      ? "bg-accent text-ink-950"
-                      : "text-slate-300 hover:bg-ink-800"
+                      ? "bg-brass text-ink-950"
+                      : "text-steel-light hover:bg-ink-800 hover:text-cream"
                   }`}
                 >
                   <Icon className="h-[18px] w-[18px]" />
@@ -219,26 +219,33 @@ export default function App() {
       </nav>
 
       <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6">
-        <header className="mb-6">
-          <h1 className="text-2xl font-bold tracking-tight text-slate-50">
-            {active.label}
-          </h1>
-          <p className="mt-1 max-w-xl text-sm text-slate-400">
-            {active.blurb}
-          </p>
-        </header>
+        {tab !== "plan" && (
+          <header className="mb-6">
+            <div className="mb-2 font-mono text-[11px] uppercase tracking-[0.18em] text-brass">
+              {active.label} File
+            </div>
+            <h1 className="font-display text-2xl font-bold uppercase tracking-[0.02em] text-cream">
+              {active.label}
+            </h1>
+            <p className="mt-1 max-w-xl text-sm text-steel-light">
+              {active.blurb}
+            </p>
+          </header>
+        )}
 
         {error && (
-          <div className="mb-6 rounded-xl border border-red-500/40 bg-red-500/10 px-4 py-3 text-sm text-red-300">
+          <div className="mb-6 rounded-sm border border-red/40 bg-red/10 px-4 py-3 text-sm text-red">
             {error}
           </div>
         )}
 
-        {tab === "weight" ? (
+        {tab === "plan" ? (
+          <PtQualificationDashboard sets={sets} />
+        ) : tab === "weight" ? (
           <WeightDashboard />
         ) : tab === "strength" ? (
           loading ? (
-            <div className="py-24 text-center text-slate-500">
+            <div className="py-24 text-center text-steel">
               Loading your data...
             </div>
           ) : (
@@ -249,16 +256,14 @@ export default function App() {
             />
           )
         ) : loading ? (
-          <div className="py-24 text-center text-slate-500">
+          <div className="py-24 text-center text-steel">
             Loading your data...
           </div>
         ) : sets.length === 0 ? (
-          <div className="py-24 text-center text-slate-500">
+          <div className="py-24 text-center text-steel">
             Import your Strong workout history on the Strength tab to use this
             page.
           </div>
-        ) : tab === "plan" ? (
-          <PlanDashboard sets={sets} />
         ) : (
           <NutritionDashboard sets={sets} />
         )}

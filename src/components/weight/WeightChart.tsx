@@ -36,9 +36,11 @@ export default function WeightChart({ entries }: Props) {
 
   if (data.length === 0) {
     return (
-      <div className="rounded-2xl border border-ink-700 bg-ink-900/70 p-5">
-        <h2 className="mb-3 text-sm font-semibold text-slate-200">Weight over time</h2>
-        <p className="py-12 text-center text-sm text-slate-500">
+      <div className="rounded-sm border border-cream/10 bg-ink-900 p-5">
+        <h2 className="mb-3 font-mono text-xs uppercase tracking-[0.14em] text-brass">
+          Weight Over Time
+        </h2>
+        <p className="py-12 text-center text-sm text-steel">
           Log your first weight to see the graph.
         </p>
       </div>
@@ -46,19 +48,21 @@ export default function WeightChart({ entries }: Props) {
   }
 
   return (
-    <div className="rounded-2xl border border-ink-700 bg-ink-900/70 p-5">
+    <div className="rounded-sm border border-cream/10 bg-ink-900 p-5">
       <div className="mb-3 flex items-center justify-between">
-        <h2 className="text-sm font-semibold text-slate-200">Weight over time</h2>
-        <div className="flex items-center gap-4 text-xs text-slate-500">
+        <h2 className="font-mono text-xs uppercase tracking-[0.14em] text-brass">
+          Weight Over Time
+        </h2>
+        <div className="flex items-center gap-4 text-xs text-steel">
           <span className="flex items-center gap-1.5">
-            <span className="inline-block h-2 w-5 rounded bg-[#6ea8fe]/70" /> Body weight (lb)
+            <span className="inline-block h-2 w-5 rounded bg-brass/70" /> Body weight (lb)
           </span>
           <button
             onClick={() => setShowTrend((v) => !v)}
-            className={`flex items-center gap-1.5 rounded-md px-2 py-1 transition-colors ${
+            className={`flex items-center gap-1.5 rounded-sm px-2 py-1 transition-colors ${
               showTrend
-                ? "text-[#f472b6] hover:bg-[#f472b6]/10"
-                : "text-slate-600 hover:bg-slate-700/40 line-through"
+                ? "text-[#c41e3a] hover:bg-[#c41e3a]/10"
+                : "text-steel hover:bg-ink-800 line-through"
             }`}
           >
             <span className="inline-block h-px w-5 border-t-2 border-dashed border-current" />
@@ -70,11 +74,11 @@ export default function WeightChart({ entries }: Props) {
         <ComposedChart margin={{ top: 10, right: 12, bottom: 0, left: -8 }}>
           <defs>
             <linearGradient id="weightGrad" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="#6ea8fe" stopOpacity={0.35} />
-              <stop offset="100%" stopColor="#6ea8fe" stopOpacity={0} />
+              <stop offset="0%" stopColor="#8a7456" stopOpacity={0.35} />
+              <stop offset="100%" stopColor="#8a7456" stopOpacity={0} />
             </linearGradient>
           </defs>
-          <CartesianGrid stroke="#1b212c" vertical={false} />
+          <CartesianGrid stroke="rgba(245,240,232,0.08)" vertical={false} />
           <XAxis
             dataKey="t"
             type="number"
@@ -83,12 +87,12 @@ export default function WeightChart({ entries }: Props) {
             tickFormatter={(t) =>
               new Date(t).toLocaleDateString(undefined, { month: "short", year: "2-digit" })
             }
-            stroke="#475569"
+            stroke="#9ca3af"
             fontSize={11}
             minTickGap={40}
           />
           <YAxis
-            stroke="#475569"
+            stroke="#9ca3af"
             fontSize={11}
             domain={["auto", "auto"]}
             width={44}
@@ -96,9 +100,9 @@ export default function WeightChart({ entries }: Props) {
           />
           <Tooltip
             contentStyle={{
-              background: "#0f1218",
-              border: "1px solid #272f3d",
-              borderRadius: 12,
+              background: "#252b3d",
+              border: "1px solid #3a4258",
+              borderRadius: 2,
               fontSize: 12,
             }}
             labelFormatter={(t) => new Date(t as number).toLocaleString()}
@@ -111,9 +115,9 @@ export default function WeightChart({ entries }: Props) {
             data={data}
             type="monotone"
             dataKey="weight"
-            stroke="#6ea8fe"
+            stroke="#8a7456"
             strokeWidth={2}
-            dot={{ r: 2, fill: "#6ea8fe" }}
+            dot={{ r: 2, fill: "#8a7456" }}
             isAnimationActive={false}
           />
           {showTrend && trendData.length === 2 && (
@@ -121,7 +125,7 @@ export default function WeightChart({ entries }: Props) {
               data={trendData}
               type="linear"
               dataKey="trend"
-              stroke="#f472b6"
+              stroke="#c41e3a"
               strokeWidth={2}
               strokeDasharray="6 4"
               dot={false}

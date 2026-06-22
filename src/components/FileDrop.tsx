@@ -32,10 +32,10 @@ export default function FileDrop({ onCsv, currentName }: Props) {
         if (file) handleFile(file);
       }}
       onClick={() => inputRef.current?.click()}
-      className={`flex cursor-pointer items-center gap-3 rounded-xl border border-dashed px-4 py-2.5 text-sm transition ${
+      className={`flex cursor-pointer items-center gap-3 rounded-sm border border-dashed px-4 py-2.5 text-sm transition ${
         dragging
-          ? "border-accent bg-accent/10 text-accent"
-          : "border-ink-600 bg-ink-850 text-slate-400 hover:border-ink-600/80 hover:text-slate-200"
+          ? "border-brass bg-brass/10 text-brass"
+          : "border-cream/20 bg-ink-850 text-steel-light hover:border-brass/60 hover:text-cream"
       }`}
     >
       <svg
@@ -53,9 +53,11 @@ export default function FileDrop({ onCsv, currentName }: Props) {
         <line x1="12" y1="3" x2="12" y2="15" />
       </svg>
       <div className="leading-tight">
-        <div className="font-medium text-slate-300">Drop a Strong export</div>
-        <div className="text-xs text-slate-500">
-          Loaded: <span className="text-slate-400">{currentName}</span>
+        <div className="font-mono text-xs uppercase tracking-[0.06em] text-steel-light">
+          Drop a Strong export
+        </div>
+        <div className="text-xs text-steel">
+          Loaded: <span className="text-steel-light">{currentName}</span>
         </div>
       </div>
       <input

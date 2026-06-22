@@ -30,31 +30,31 @@ export default function ScatterCard({ result }: Props) {
   const trendUp = slope >= 0;
 
   return (
-    <div className="rounded-2xl border border-ink-700 bg-ink-900/70 p-5">
+    <div className="rounded-sm border border-cream/10 bg-ink-900 p-5">
       <div className="mb-1 flex items-baseline justify-between">
-        <h3 className="text-sm font-semibold text-slate-200">
-          {def.label} <span className="text-slate-500">vs next improvement</span>
+        <h3 className="font-mono text-xs uppercase tracking-[0.1em] text-brass">
+          {def.label} <span className="text-steel">vs next improvement</span>
         </h3>
-        <span className="font-mono text-xs text-slate-400">
+        <span className="font-mono text-xs text-steel-light">
           r = {r.toFixed(2)} - n = {n}
         </span>
       </div>
-      <p className="mb-3 text-xs text-slate-500">{def.description}</p>
+      <p className="mb-3 text-xs text-steel">{def.description}</p>
       <ResponsiveContainer width="100%" height={220}>
         <ComposedChart data={data} margin={{ top: 6, right: 10, bottom: 14, left: -10 }}>
-          <CartesianGrid stroke="#1b212c" />
+          <CartesianGrid stroke="rgba(245,240,232,0.08)" />
           <XAxis
             type="number"
             dataKey="x"
             name={def.label}
-            stroke="#475569"
+            stroke="#9ca3af"
             fontSize={11}
             domain={["dataMin", "dataMax"]}
             label={{
               value: `${def.label} (${def.unit})`,
               position: "insideBottom",
               offset: -8,
-              fill: "#64748b",
+              fill: "#9ca3af",
               fontSize: 11,
             }}
           />
@@ -62,17 +62,17 @@ export default function ScatterCard({ result }: Props) {
             type="number"
             dataKey="y"
             name="Improvement"
-            stroke="#475569"
+            stroke="#9ca3af"
             fontSize={11}
             width={42}
           />
           <ZAxis range={[40, 40]} />
           <Tooltip
-            cursor={{ stroke: "#272f3d" }}
+            cursor={{ stroke: "#3a4258" }}
             contentStyle={{
-              background: "#0f1218",
-              border: "1px solid #272f3d",
-              borderRadius: 12,
+              background: "#252b3d",
+              border: "1px solid #3a4258",
+              borderRadius: 2,
               fontSize: 12,
             }}
             formatter={(value: number, key: string) =>
@@ -82,10 +82,10 @@ export default function ScatterCard({ result }: Props) {
             }
             labelFormatter={() => ""}
           />
-          <Scatter dataKey="y" fill="#6ea8fe" isAnimationActive={false} />
+          <Scatter dataKey="y" fill="#8a7456" isAnimationActive={false} />
           <Line
             dataKey="yLine"
-            stroke={trendUp ? "#34d399" : "#f87171"}
+            stroke={trendUp ? "#3f8557" : "#c41e3a"}
             strokeWidth={2}
             dot={false}
             isAnimationActive={false}

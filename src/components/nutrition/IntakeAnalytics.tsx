@@ -101,69 +101,69 @@ export default function IntakeAnalytics({ log, sets }: Props) {
   );
 
   return (
-    <div className="rounded-2xl border border-ink-700 bg-ink-900/70 p-5">
+    <div className="rounded-sm border border-cream/10 bg-ink-900 p-5">
       <div className="mb-1 flex items-baseline justify-between">
-        <h2 className="text-sm font-semibold text-slate-200">
-          Intake vs results
+        <h2 className="font-mono text-xs uppercase tracking-[0.14em] text-brass">
+          Intake vs Results
         </h2>
         {enough && (
-          <span className="font-mono text-xs text-slate-400">
+          <span className="font-mono text-xs text-steel-light">
             r = {r.toFixed(2)} - {weightPoints.length} weeks
           </span>
         )}
       </div>
-      <p className="mb-4 text-xs text-slate-500">
+      <p className="mb-4 text-xs text-steel">
         Weekly average daily calories vs body-weight change that week. Correlation from
         your own history, not proof of cause and effect.
       </p>
 
       {!enough ? (
-        <div className="rounded-xl border border-ink-700 bg-ink-850 px-4 py-6 text-sm text-slate-400">
+        <div className="rounded-sm border border-cream/10 bg-ink-850 px-4 py-6 text-sm text-steel-light">
           Keep logging - this needs at least {MIN_POINTS} weeks of data to find a pattern.
           You've logged{" "}
-          <span className="text-slate-200">{loggedDays} day(s)</span> across{" "}
-          <span className="text-slate-200">{weeks.length} week(s)</span> so far.
+          <span className="text-cream">{loggedDays} day(s)</span> across{" "}
+          <span className="text-cream">{weeks.length} week(s)</span> so far.
         </div>
       ) : (
         <>
           <ResponsiveContainer width="100%" height={240}>
             <ComposedChart data={chartData} margin={{ top: 6, right: 10, bottom: 16, left: -6 }}>
-              <CartesianGrid stroke="#1b212c" />
+              <CartesianGrid stroke="rgba(245,240,232,0.08)" />
               <XAxis
                 type="number"
                 dataKey="x"
-                stroke="#475569"
+                stroke="#9ca3af"
                 fontSize={11}
                 domain={["dataMin - 100", "dataMax + 100"]}
                 label={{
                   value: "Avg daily calories (kcal)",
                   position: "insideBottom",
                   offset: -8,
-                  fill: "#64748b",
+                  fill: "#9ca3af",
                   fontSize: 11,
                 }}
               />
               <YAxis
                 type="number"
                 dataKey="y"
-                stroke="#475569"
+                stroke="#9ca3af"
                 fontSize={11}
                 width={44}
                 label={{
                   value: "Weight chg (lb)",
                   angle: -90,
                   position: "insideLeft",
-                  fill: "#64748b",
+                  fill: "#9ca3af",
                   fontSize: 11,
                 }}
               />
               <ZAxis range={[45, 45]} />
               <Tooltip
-                cursor={{ stroke: "#272f3d" }}
+                cursor={{ stroke: "#3a4258" }}
                 contentStyle={{
-                  background: "#0f1218",
-                  border: "1px solid #272f3d",
-                  borderRadius: 12,
+                  background: "#252b3d",
+                  border: "1px solid #3a4258",
+                  borderRadius: 2,
                   fontSize: 12,
                 }}
                 formatter={(value: number, key: string) =>
@@ -173,10 +173,10 @@ export default function IntakeAnalytics({ log, sets }: Props) {
                 }
                 labelFormatter={() => ""}
               />
-              <Scatter dataKey="y" fill="#6ea8fe" isAnimationActive={false} />
+              <Scatter dataKey="y" fill="#8a7456" isAnimationActive={false} />
               <Line
                 dataKey="yLine"
-                stroke={r >= 0 ? "#34d399" : "#f87171"}
+                stroke={r >= 0 ? "#3f8557" : "#c41e3a"}
                 strokeWidth={2}
                 dot={false}
                 isAnimationActive={false}
@@ -186,7 +186,7 @@ export default function IntakeAnalytics({ log, sets }: Props) {
           </ResponsiveContainer>
 
           <div className="mt-4 flex flex-col gap-2">
-            <div className="rounded-xl border border-ink-700 bg-ink-850 p-3 text-sm text-slate-300">
+            <div className="rounded-sm border border-cream/10 bg-ink-850 p-3 text-sm text-steel-light">
               {r > 0.1
                 ? `A ${strengthOf(r)} positive link (r = ${r.toFixed(2)}): weeks where you averaged more calories tended to show more weight gain. Eating more is moving the needle - push the higher-calorie weeks.`
                 : r < -0.1
@@ -194,7 +194,7 @@ export default function IntakeAnalytics({ log, sets }: Props) {
                   : `No clear link yet (r = ${r.toFixed(2)}). Log more weeks, especially higher-calorie ones, to see the trend.`}
             </div>
             {strengthCorr && (
-              <div className="rounded-xl border border-ink-700 bg-ink-850 p-3 text-sm text-slate-300">
+              <div className="rounded-sm border border-cream/10 bg-ink-850 p-3 text-sm text-steel-light">
                 Intake vs weekly strength change: {strengthOf(strengthCorr.r)} relationship
                 (r = {strengthCorr.r.toFixed(2)}) across {strengthCorr.n} weeks.
               </div>

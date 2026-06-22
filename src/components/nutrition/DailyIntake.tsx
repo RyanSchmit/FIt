@@ -26,34 +26,34 @@ export default function DailyIntake({ entry, onSave, onClear }: Props) {
   }
 
   return (
-    <div className="rounded-2xl border border-ink-700 bg-ink-900/70 p-5">
-      <h2 className="mb-1 text-sm font-semibold text-slate-200">
-        Today's intake
+    <div className="rounded-sm border border-cream/10 bg-ink-900 p-5">
+      <h2 className="mb-1 font-mono text-xs uppercase tracking-[0.14em] text-brass">
+        Today's Intake
       </h2>
-      <p className="mb-4 text-xs text-slate-500">
+      <p className="mb-4 text-xs text-steel">
         Log your food in MyFitnessPal, then enter the day's totals here.
       </p>
 
       <form onSubmit={submit} className="flex flex-col gap-3">
         <div className="grid grid-cols-2 gap-3">
-          <label className="flex flex-col gap-1.5 text-xs text-slate-400">
+          <label className="flex flex-col gap-1.5 font-mono text-[10.5px] uppercase tracking-[0.08em] text-steel-light">
             Calories (kcal)
             <input
               value={calories}
               onChange={(e) => setCalories(e.target.value)}
               inputMode="numeric"
               placeholder="e.g. 2800"
-              className="rounded-lg border border-ink-700 bg-ink-850 px-3 py-2 text-sm text-slate-100 outline-none placeholder:text-slate-600 focus:border-accent"
+              className="rounded-sm border border-cream/[0.18] bg-ink-850 px-3 py-2 text-sm text-cream outline-none placeholder:text-steel focus:border-brass"
             />
           </label>
-          <label className="flex flex-col gap-1.5 text-xs text-slate-400">
+          <label className="flex flex-col gap-1.5 font-mono text-[10.5px] uppercase tracking-[0.08em] text-steel-light">
             Protein (g)
             <input
               value={protein}
               onChange={(e) => setProtein(e.target.value)}
               inputMode="numeric"
               placeholder="e.g. 160"
-              className="rounded-lg border border-ink-700 bg-ink-850 px-3 py-2 text-sm text-slate-100 outline-none placeholder:text-slate-600 focus:border-accent"
+              className="rounded-sm border border-cream/[0.18] bg-ink-850 px-3 py-2 text-sm text-cream outline-none placeholder:text-steel focus:border-brass"
             />
           </label>
         </div>
@@ -63,14 +63,14 @@ export default function DailyIntake({ entry, onSave, onClear }: Props) {
             <button
               type="button"
               onClick={onClear}
-              className="rounded-lg px-3 py-2 text-sm text-slate-400 transition hover:bg-red-500/10 hover:text-red-300"
+              className="rounded-sm px-3 py-2 text-sm text-steel-light transition hover:bg-red/10 hover:text-red"
             >
               Clear
             </button>
           )}
           <button
             type="submit"
-            className="rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-ink-950 transition hover:bg-accent-strong"
+            className="rounded-sm bg-brass px-4 py-2 font-display text-sm uppercase tracking-[0.04em] text-ink-950 transition hover:bg-accent-strong"
           >
             {entry ? "Update today" : "Save today"}
           </button>
